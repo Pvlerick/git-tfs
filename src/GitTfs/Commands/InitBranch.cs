@@ -318,6 +318,12 @@ namespace GitTfs.Commands
                             tfsBranch.Error = ex;
                         }
                     }
+
+                    if (tfsBranch.Error != null)
+                    {
+                        Trace.TraceWarning("Exception for branch {0}: {1}{2}{3}", tfsBranch.TfsRepositoryPath, tfsBranch.Error.Message,
+                            Environment.NewLine, tfsBranch.Error.StackTrace);
+                    }
                 }
             } while (branchesToProcess.Any(b => !b.IsEntirelyFetched && b.Error == null) && isSomethingDone);
 
