@@ -1018,7 +1018,6 @@ namespace GitTfs.Core
             var includeTeamProjectName = !Repository.IsInSameTeamProjectAsDefaultRepository(tfsRepositoryPath);
             var gitBranchName = tfsRepositoryPath.ToGitBranchNameFromTfsRepositoryPath(includeTeamProjectName);
             gitBranchName = Repository.AssertValidBranchName(gitBranchName);
-            Trace.TraceInformation("The name of the local branch will be : " + gitBranchName);
             return gitBranchName;
         }
 
@@ -1051,7 +1050,7 @@ namespace GitTfs.Core
                 string.IsNullOrWhiteSpace(gitBranchNameExpected) ? tfsRepositoryPath : gitBranchNameExpected);
             if (string.IsNullOrWhiteSpace(gitBranchName))
                 throw new GitTfsException("error: The Git branch name '" + gitBranchName + "' is not valid...\n");
-            Trace.WriteLine("Git local branch will be :" + gitBranchName);
+            Trace.TraceInformation("{0} will be mapped to a git branch named {1}", tfsRepositoryPath, gitBranchName);
 
             string sha1RootCommit = null;
             if (rootChangesetId != -1)
